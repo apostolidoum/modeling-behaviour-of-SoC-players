@@ -1,0 +1,20 @@
+FOLDER DESCRIPTIONS
+-------------------
+original : the original soclogs
+extended : the soclogs with an extra field at the begining of each line, containing the turn number
+reduced : data collected from the soclogs to be used as features
+DataTables : .pkl files  
+
+SCRIPT DESCRIPTIONS
+-------------------
+turn.py: script to add turn number to logs (tested ALL OK)
+reduced_logs: script to choose the useful messages from logs (tested ALL OK)
+collectfeatures : script to make game state features and labels (tested for pilot01)
+                    results are saved to .pkl files at DataTables
+
+
+
+(if you want to repeat the process run scripts the same order as above)
+ 
+
+the rest are classes, used by the scripts (tested ALL OK)
