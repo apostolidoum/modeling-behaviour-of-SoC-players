@@ -23,6 +23,7 @@ import pandas as pd
 from GameState import GameState
 from PlayerState import PlayerState
 from Labels import Labels
+from pathlib import Path
 
 # the soclog files
 soclog_files = ["reduced/pilot/pilot20.soclog",
@@ -882,8 +883,15 @@ def get_chat(df):
     chat_msg = fields[2][fields[2].find("=")+1:]
     return (nickname, chat_msg)
     
-        
- 
+# make directories to save the results
+datatb_dir = Path.cwd() / "DataTables/season2" 
+datatb_dir.mkdir(parents=True, exist_ok=True)
+
+datatb_dir = Path.cwd() / "DataTables/season1" 
+datatb_dir.mkdir(parents=True, exist_ok=True)
+
+datatb_dir = Path.cwd() / "DataTables/pilot" 
+datatb_dir.mkdir(parents=True, exist_ok=True)        
         
     
 ############################
