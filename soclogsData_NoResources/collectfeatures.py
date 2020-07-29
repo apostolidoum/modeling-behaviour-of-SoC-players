@@ -902,7 +902,9 @@ datatb_dir.mkdir(parents=True, exist_ok=True)
 # seen_list = []
 # PROBLEM WITH PILOT19, PILOT18
 # Problem at get_board
+print('Collecting features, please be patient...')
 for file in soclog_files:
+    print('processing file ',file)
     # read log
     # seen_list.append(file) # OK without pilot18 pilot19
     df = read_soclog(file)
