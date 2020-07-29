@@ -22,6 +22,7 @@ import gc # garbage collector
 import csv
 import numpy as np
 import pickle
+from pathlib import Path
 
 # load the data
 gamestates_train = np.load('./traindata/gamestates.npy')
@@ -34,6 +35,13 @@ y_test = np.load('./testdata/labels.npy')
 # load embeddings and their params
 embedding_matrix = np.load('./embedding_matrix.npy')
 vocab_size, max_doc_len = pickle.load(open('embeddingparams.pkl','rb'))
+
+# make directories to save the results
+models_dir = Path.cwd() / "models/combinedFFLSTM" 
+models_dir.mkdir(parents=True, exist_ok=True)
+
+pics_dir = Path.cwd() / "pics/combinedFFLSTM" 
+pics_dir.mkdir(parents=True, exist_ok=True)
 
 
 # design the model
@@ -74,8 +82,8 @@ model.compile(optimizer='adam', loss='binary_crossentropy',
               metrics=['accuracy',recall_m,precision_m,f1_m])
 
 # add checkpoints
-filepath="./models/combinedFFLSTM/weights-improvement-{epoch:02d}-{val_acc:.4f}.hdf5"
-checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+filepath="./models/combinedFFLSTM/weights-improvement-{epoch:02d}-{val_accuracy:.4f}.hdf5"
+checkpoint = ModelCheckpoint(filepath, monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
 
 # SOS REMEMBER TO CLOSE f
 # log the weights to check if they get updated during training
@@ -102,8 +110,8 @@ f.close()
 # plot performance-learning curves
 # summarize history for accuracy
 plt.figure()
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.title('model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
@@ -127,7 +135,7 @@ plt.savefig('./pics/combinedFFLSTM/loss.png',bbox_inches='tight',dpi=300)
 
 # summarize history for precision
 plt.figure()
-plt.plot(history.history['acc'])
+plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_precision_m'])
 plt.title('model accuracy')
 plt.ylabel('precision')
@@ -139,7 +147,7 @@ plt.savefig('./pics/combinedFFLSTM/precision.png',bbox_inches='tight',dpi=300)
 
 # summarize history for recall
 plt.figure()
-plt.plot(history.history['acc'])
+plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_recall_m'])
 plt.title('model accuracy')
 plt.ylabel('recall')
@@ -151,7 +159,7 @@ plt.savefig('./pics/combinedFFLSTM/recall.png',bbox_inches='tight',dpi=300)
 
 # summarize history for f1
 plt.figure()
-plt.plot(history.history['acc'])
+plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_f1_m'])
 plt.title('model accuracy')
 plt.ylabel('f1 score')
