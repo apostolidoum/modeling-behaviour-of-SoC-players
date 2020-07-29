@@ -25,3 +25,27 @@ This step entailed a novel modeling of the way in which information about a game
 Then linguistic and gameplay information from the created Dataset was exploited by neural networks to predict the players' actions.
 Architectures of Feed Forward Neural Networks, Recurrent Neural Networks (such as LSTMs) as well as combined architectures of the two were investigated in the context of this thesis.
 
+### Setting up the environment
+
+- Create a new conda environment using 
+
+`conda create --name <env_name> --file requirements.txt`
+
+- Activate the environment using
+
+`conda activate <env_name>`
+
+### Create a SoC dataset
+
+- Transfer the .soclog files in `soclogsData_NoResources` 
+
+    - If you are repeating the process with the same files used in this thesis, unzip `soclogs.zip` in `soclogsData_NoResources` 
+
+    - If you are using new .soclog files make sure you adjust filenames and/or directory names accordingly. (code applicable for .soclog files from jSettlers v.1)
+
+- Run `python turn.py`
+
+- Run `python reduced_logs.py`
+
+- Run `python collectfeatures.py`
+
