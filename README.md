@@ -35,7 +35,7 @@ Architectures of Feed Forward Neural Networks, Recurrent Neural Networks (such a
 
 `conda activate <env_name>`
 
-### Create a SoC dataset
+### Creating a SoC dataset
 
 - Transfer the .soclog files in `soclogsData_NoResources` 
 
