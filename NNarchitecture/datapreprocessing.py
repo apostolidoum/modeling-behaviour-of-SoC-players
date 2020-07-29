@@ -13,6 +13,7 @@ from keras.preprocessing.text import Tokenizer
 from keras_preprocessing.sequence import pad_sequences
 from sklearn.model_selection import train_test_split
 import pickle
+from pathlib import Path
 
 # Disambiguation:
 # game = pkl file name e.g. pilot01_chats.pkl
@@ -209,7 +210,7 @@ max_doc_len = 0
 for seq in encoded_docs:
     if len(seq) > max_doc_len :
         max_doc_len = len(seq)
-print('longest doc len : ',max_doc_len)
+print('longest document in the chats data is ',max_doc_len,' words long')
 
 # padding sequences
 padded_docs = pad_sequences(encoded_docs, maxlen=max_doc_len, padding='post')
@@ -218,8 +219,12 @@ padded_docs = pad_sequences(encoded_docs, maxlen=max_doc_len, padding='post')
 #
 # load the embedding into memory, in a dictionary 
 # load the whole embedding into memory
+# IMPORTANT : don't forget to dowload the glove embeddings from 
+#               https://nlp.stanford.edu/projects/glove/
 embeddings_index = dict()
 with open('embeddings/glove.6B/glove.6B.100d.txt') as f:
+    print('Loading GloVe embedding word vectors')
+    print('This might take a while. Please be patient...')
     for line in f:
         values = line.split()
         word = values[0]
@@ -254,6 +259,14 @@ gamestates_train = x_train[:,0:8036]
 gamestates_test = x_test[:,0:8036]
 chats_train = x_train[:,8036:]
 chats_test = x_test[:,8036:]        
+
+# make directories to save the results
+train_dir = Path.cwd() / "traindata" 
+train_dir.mkdir(parents=True, exist_ok=True)
+
+test_dir = Path.cwd() / "testdata" 
+test_dir.mkdir(parents=True, exist_ok=True)
+    
         
 np.save('./traindata/gamestates',gamestates_train)
 np.save('./testdata/gamestates',gamestates_test)
