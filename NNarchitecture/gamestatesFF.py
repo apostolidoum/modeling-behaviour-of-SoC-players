@@ -20,12 +20,20 @@ from keras import backend as K
 import gc # garbage collector
 import csv
 import numpy as np
+from pathlib import Path
 
 # load the data
 x_train = np.load('./traindata/gamestates.npy')
 y_train = np.load('./traindata/labels.npy')
 x_test = np.load('./testdata/gamestates.npy')
 y_test = np.load('./testdata/labels.npy')
+
+# make directories to save the results
+models_dir = Path.cwd() / "models/gamestatesFF" 
+models_dir.mkdir(parents=True, exist_ok=True)
+
+pics_dir = Path.cwd() / "pics/gamestatesFF" 
+pics_dir.mkdir(parents=True, exist_ok=True)
 
 # define keras model
 model = Sequential()
@@ -48,8 +56,8 @@ model.compile(loss='binary_crossentropy', optimizer='adam',
               metrics=['accuracy',recall_m,precision_m,f1_m])
     
 # add checkpoints
-filepath="./models/gamestatesFF/weights-improvement-{epoch:02d}-{val_acc:.4f}.hdf5"
-checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+filepath="./models/gamestatesFF/weights-improvement-{epoch:02d}-{val_accuracy:.4f}.hdf5"
+checkpoint = ModelCheckpoint(filepath, monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
 
 # SOS REMEMBER TO CLOSE f
 # log the weights to check if they get updated during training
@@ -70,11 +78,13 @@ history = model.fit(x_train,y_train, validation_data=(x_test,y_test),
 
 f.close()
 
+
+
 # plot performance-learning curves
 # summarize history for accuracy
 plt.figure()
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.title('model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
@@ -95,7 +105,7 @@ plt.savefig('./pics/gamestatesFF/loss.png',bbox_inches='tight',dpi=300)
 
 # summarize history for precision
 plt.figure()
-plt.plot(history.history['acc'])
+plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_precision_m'])
 plt.title('model accuracy')
 plt.ylabel('precision')
@@ -107,7 +117,7 @@ plt.savefig('./pics/gamestatesFF/precision.png',bbox_inches='tight',dpi=300)
 
 # summarize history for recall
 plt.figure()
-plt.plot(history.history['acc'])
+plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_recall_m'])
 plt.title('model accuracy')
 plt.ylabel('recall')
@@ -118,7 +128,7 @@ plt.savefig('./pics/gamestatesFF/recall.png',bbox_inches='tight',dpi=300)
 
 # summarize history for f1
 plt.figure()
-plt.plot(history.history['acc'])
+plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_f1_m'])
 plt.title('model accuracy')
 plt.ylabel('f1 score')
