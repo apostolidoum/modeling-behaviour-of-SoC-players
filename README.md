@@ -49,3 +49,49 @@ Architectures of Feed Forward Neural Networks, Recurrent Neural Networks (such a
 
 - Run `python collectfeatures.py`
 
+
+### Preprocessing the data
+
+- In this thesis we used the Glove Embeddings. Download them from [here](http://nlp.stanford.edu/data/glove.6B.zip) and unzip in `NNarchitecture/embeddings/`
+
+- Run `python GamestatesOHE.py`
+
+- Run `python datapreprocessing.py`
+
+### Train the networks
+
+
+You can now run any of the modules `gamestatesFF.py`, `gamestatesLSTM.py`, `chatsLSTM.py`, `combinedFFLSTM.py`, `combinedLSTMLSTM.py` to train the models.
+
+
+*NOTE THAT :* This project requires a lot of disk space to run since the networks are deep and the training spans over many epochs. Make sure that you have enough space and that your system does not overheat during the training process. Try testing the training for a small number of epochs or smaller networks before getting deeper to make sure that you do not damage your system.
+
+Other than that feel free to tweak any parameters or even try the network configurations tested in this thesis and see what results you get!
+
+*DISCLAIMER :* The precision, recall and F1 score have been removed from Keras since version 2.0, because those metrics are global metrics whereas Keras works in batches.
+As a result they might be more misleading than helpful. It is advised both by the Keras community and the author that they be interpreted with caution. The F1 score is printed when running the training of the models but has not been included in the dissertation due to its unreliability.
+
+Enjoy!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
