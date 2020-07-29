@@ -19,6 +19,7 @@ SOCGameTextMsg, GAME-TEXT-MESSAGE, SOCGameState
 
 import pandas as pd
 import csv
+from pathlib import Path
 
 
 # list of all the soclogs files locations
@@ -234,6 +235,16 @@ def write_to_csv(data,filename,delimiter):
     #           needed when saving with del |
     data.to_csv(filename, header=None, index=None, sep=delimiter)
                 #quoting=csv.QUOTE_NONE, escapechar=' ')
+
+# make directories to save the results
+reduced_dir = Path.cwd() / "reduced/season2" 
+reduced_dir.mkdir(parents=True, exist_ok=True)
+
+reduced_dir = Path.cwd() / "reduced/season1" 
+reduced_dir.mkdir(parents=True, exist_ok=True)
+
+reduced_dir = Path.cwd() / "reduced/pilot" 
+reduced_dir.mkdir(parents=True, exist_ok=True)
 
 # run for every soclog
 for soclog, r_log in zip(soclog_files,r_soclog_files):
