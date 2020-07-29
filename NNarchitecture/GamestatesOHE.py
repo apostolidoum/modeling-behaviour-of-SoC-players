@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 import re
 import os
-
+from pathlib import Path
 
 
 # settlements and cities are built on node coordinates
@@ -543,6 +543,18 @@ datafiles = ["../soclogsData_NoResources/DataTables/pilot/pilot03_gamestates.pkl
             "../soclogsData_NoResources/DataTables/season1/League2-2012-06-17-19-58-07-+0100_gamestates.pkl"
             ]
 
+# make directories to save the results
+ohedata_dir = Path.cwd() / "OHEdata/season2" 
+ohedata_dir.mkdir(parents=True, exist_ok=True)
+
+ohedata_dir = Path.cwd() / "OHEdata/season1" 
+ohedata_dir.mkdir(parents=True, exist_ok=True)
+
+ohedata_dir = Path.cwd() / "OHEdata/pilot" 
+ohedata_dir.mkdir(parents=True, exist_ok=True)      
+
+print('Converting gamestates data to ohe-hot encoded vectors')
+print('This might take a while. Please be patient...')
 for file in datafiles:
     # create a dir with the game name
     # to save the 11 np arrays of the game
@@ -553,13 +565,10 @@ for file in datafiles:
     dest = "./OHEdata/"+season
     gamename = filename_parts[4][:-15] #exclude the _gamestates.pkl part :-)  
     path = dest+"/"+gamename
-    print(path)
     try:
         os.mkdir(path)
     except OSError :
         print("Creation of the directory %s failed" %path)
-    else:
-        print("Successfully created the directory %s " %path)
       
         
     gamestates = pd.read_pickle(file)
