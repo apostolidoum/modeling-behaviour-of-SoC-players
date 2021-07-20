@@ -3,6 +3,8 @@
 This repository contains the code implemented during work on my diploma thesis for the Technical University of Crete, department of Electrical and Computer Engineering, titled 
 **Exploiting linguistic data for modeling players’ behaviour instrategic board games**.
 
+> The complete [thesis text](https://dias.library.tuc.gr/view/86478?locale=en) is available at the Institutional Repository of TUC
+
 ### Thesis Abstract
 
 Certain games exhibit social aspects realized often via natural
