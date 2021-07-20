@@ -71,9 +71,7 @@ Architectures of Feed Forward Neural Networks, Recurrent Neural Networks (such a
 
 You can now run any of the modules `gamestatesFF.py`, `gamestatesLSTM.py`, `chatsLSTM.py`, `combinedFFLSTM.py`, `combinedLSTMLSTM.py` to train the models.
 
-![thesis figure](https://github.com/apostolidoum/modeling-behaviour-of-SoC-players/blob/master/thesis-figs/Standalone-archs.png)
-
-![thesis figure](https://github.com/apostolidoum/modeling-behaviour-of-SoC-players/blob/master/thesis-figs/Combined-archs.png)
+![thesis figure](https://github.com/apostolidoum/modeling-behaviour-of-SoC-players/blob/master/thesis-figs/Archs.PNG)
 
 
 *NOTE THAT :* This project requires a lot of disk space to run since the networks are deep and the training spans over many epochs. Make sure that you have enough space and that your system does not overheat during the training process. Try testing the training for a small number of epochs or smaller networks before getting deeper to make sure that you do not damage your system.
